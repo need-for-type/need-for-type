@@ -1,5 +1,4 @@
-require "need_for_type/version"
-require 'need_for_type/typer'
+require_all 'need_for_type/'
 
 module NeedForType
 

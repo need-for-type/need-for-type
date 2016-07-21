@@ -1,5 +1,6 @@
 require "need_for_type/version"
-require 'curses'
+require 'need_for_type/typer'
 
 module NeedForType
+
 end

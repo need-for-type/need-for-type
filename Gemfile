@@ -5,3 +5,4 @@ gemspec
 
 gem 'curses'
 gem 'require_all'
+gem 'rubocop'

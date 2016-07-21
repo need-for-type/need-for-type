@@ -5,16 +5,16 @@ class FileManager
 
   def initialize(difficulty)
     @difficulty = difficulty
-    @path = "#{FILE_DIR}/#{@difficulty}/"
+    @path = "#{FILE_DIR}/#{@difficulty}"
   end
 
   # Selects random file from folder
   def load_file
-    dir_content = Dir[@path]
-    file_no = rand(1..dir_content.count)
+    directory = Dir[@path]
+    random_file = rand(1..directory.count)
 
     # TODO: apply markov's chain's to the text
-    @content = File.read("#{@path}/#{file_no}.txt")
+    @content = File.read("#{@path}/#{random_file}.txt")
   end
 
   def size

@@ -2,9 +2,6 @@ require 'curses'
 
 class WindowManager
 
-  attr_accessor :display_window
-  attr_accessor :input_window
-
   def initialize
     @display_window = Curses::Window.new(Curses.lines/1.5, Curses.cols, 0, 0)
     @display_window.box("|", "-")

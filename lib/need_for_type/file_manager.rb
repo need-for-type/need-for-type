@@ -5,7 +5,7 @@ class FileManager
 
   def initialize(difficulty)
     @difficulty = difficulty
-    @path = "#{FILE_DIR}/#{@difficulty}"
+    @path = "#{FILE_DIR}/#{@difficulty}/"
   end
 
   # Selects random file from folder

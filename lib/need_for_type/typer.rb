@@ -9,7 +9,8 @@ module NeedForType
       @window_manager = WindowManager.new
       @menu_option = 0
       @state = :menu
-      @window_manager.input_window.keypad = true
+      @window_manager.setup_input_window
+      @logger = Logger.new("typer.txt")
     end
 
     def play_state
@@ -17,6 +18,13 @@ module NeedForType
         @window_manager.render_menu(@menu_option)
         input = get_input
         check_menu_input(input)
+      elsif @state == :init_game
+        difficulty = get_difficulty
+        @file_manager = FileManager.new(difficulty)
+        @file_manager.load_file
+        @state = :game
+      elsif @state == :game
+        update
       end
     end
 
@@ -26,14 +34,25 @@ module NeedForType
           @window_manager.render_close_message
           break
         end
-        @window_manager.display_window.setpos(2,2)
-        @window_manager.display_window.addstr(input_char)
-        @window_manager.refresh_display
+        @window_manager.render_input(input_char)
+        @logger.info(@file_manager.content)
+        @window_manager.render_display(@file_manager.content)
       end
     end
 
 
     private
+
+    def get_difficulty
+      case @menu_option
+      when 0
+        'easy'
+      when 1
+        'medium'
+      when 2
+        'hard'
+      end
+    end
 
     def get_input
       @window_manager.input_window.getch
@@ -42,10 +61,10 @@ module NeedForType
     def check_menu_input(input)
       if input == Curses::Key::DOWN
         @menu_option = (@menu_option+1)%3
-        #@menu_option = 3 if @menu_option = 0
       elsif input == Curses::Key::UP
         @menu_option = (@menu_option-1)%3
-        #@menu_option = 3 if @menu_option = 0
+      elsif input == Curses::Key::ENTER || input == 10
+        @state = :init_game
       else
         @menu_option
       end

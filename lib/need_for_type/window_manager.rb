@@ -68,4 +68,22 @@ class WindowManager
     sleep 3
   end
 
+  def render_display(content)
+    @display_window.clear
+    @display_window.setpos(2,2)
+    @display_window.addstr(content)
+    refresh_display
+  end
+
+  def render_input(word)
+    @input_window.clear
+    @input_window.setpos(2,2)
+    @input_window.addstr(word)
+    refresh_input
+  end
+
+  def setup_input_window
+    @input_window.keypad = true
+  end
+
 end

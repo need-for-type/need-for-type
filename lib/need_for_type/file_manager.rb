@@ -4,12 +4,12 @@ class FileManager
   attr_accessor :content
 
   def initialize(difficulty)
-    @difficulty = difficulty
+    @difficulty = difficulty_to_s(difficulty) 
     @path = "#{FILE_DIR}/#{@difficulty}/"
   end
 
-  # Selects random file from folder
-  def load_file
+  # Reads random file from difficulty folder
+  def get_random_text
     directory = Dir[@path]
     random_file = rand(1..directory.count)
 
@@ -17,7 +17,16 @@ class FileManager
     @content = File.read("#{@path}/#{random_file}.txt")
   end
 
-  def size
-    content.size
+  private
+
+  def difficulty_to_s(difficulty) 
+    case difficulty
+    when 0
+      'easy'
+    when 1
+      'medium'
+    when 2
+      'hard'
+    end
   end
 end

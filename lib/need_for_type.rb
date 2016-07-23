@@ -5,15 +5,11 @@ require_all 'need_for_type/'
 
 module NeedForType
   Curses.init_screen
-  if File.exist?('typer.txt')
-    File.delete('typer.txt')
-  end
+  Curses.noecho
 
   begin
     typer = Typer.new
-    while true
-      typer.play_state
-    end
+    typer.play
   ensure
     Curses.close_screen
   end

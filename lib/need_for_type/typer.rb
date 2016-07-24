@@ -1,6 +1,7 @@
 require 'logger'
 require 'curses'
-require './need_for_type/window_manager'
+require './need_for_type/display_window'
+require './need_for_type/input_window'
 
 module NeedForType
   class Typer
@@ -8,7 +9,8 @@ module NeedForType
     def initialize
       @logger = Logger.new('need_for_type.log')
 
-      @window_manager = WindowManager.new
+      @display_window = DisplayWindow.new
+      @input_window = InputWindow.new
 
       @state = :menu
       @menu_option = 0
@@ -33,9 +35,9 @@ module NeedForType
     end
 
     def handle_menu
-      @window_manager.render_menu(@menu_option)
+      @display_window.render_menu(@menu_option)
 
-      input = @window_manager.get_input
+      input = @input_window.get_input
       @logger.info("Input: #{input}")
 
       if input == Curses::Key::UP
@@ -51,16 +53,16 @@ module NeedForType
       @file_manager = FileManager.new(@menu_option)
 
       @text = @file_manager.get_random_text
-      @window_manager.render_game_text(@text)
+      @display_window.render_game_text(@text)
 
       @state = :in_game
     end
 
     def handle_in_game
-      input = @window_manager.get_input
+      input = @input_window.get_input
       @logger.info("Input: #{input}")
 
-      @window_manager.add_input_content(input) 
+      @input_window.add_input_content(input) 
 
       # TODO terminate
     end

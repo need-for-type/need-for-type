@@ -36,9 +36,7 @@ module NeedForType
 
     def handle_menu
       @display_window.render_menu(@menu_option)
-
       input = @input_window.get_input
-      @logger.info("Input: #{input}")
 
       if input == Curses::Key::UP
         @menu_option = (@menu_option - 1) % 3
@@ -53,19 +51,57 @@ module NeedForType
       @file_manager = FileManager.new(@menu_option)
 
       @text = @file_manager.get_random_text
+      prepare_words
       @display_window.render_game_text(@text)
+
+      @word = ""
+      @input_words = []
+      @words_completed = 0
 
       @state = :in_game
     end
 
     def handle_in_game
       input = @input_window.get_input
-      @logger.info("Input: #{input}")
+      temp = @word + input
 
-      @input_window.add_input_content(input) 
+      if compare(temp) && !ended?(temp)
+        @word = temp
+        @input_window.add_input_content(temp)
+      elsif ended?(temp)
+        @word = temp
+        @words_completed+=1
 
-      # TODO terminate
+        if @input_words.size == @file_words.size
+          @state = :menu
+        else
+          reset_input
+        end
+      else
+        @input_window.add_input_content(temp)
+        @input_window.beep
+      end
     end
 
+    private
+
+    def reset_input
+      @input_window.clear
+      @input_window.refresh
+      @input_words << @word
+      @word = ""
+    end
+
+    def ended?(word)
+      @file_words[@words_completed] == word
+    end
+
+    def compare(word)
+      @file_words[@words_completed].start_with?(word)
+    end
+
+    def prepare_words
+      @file_words = @text.split(' ').map { |word| word << ' ' }
+    end
   end
 end

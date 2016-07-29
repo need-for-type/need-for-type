@@ -1,5 +1,7 @@
 require 'curses'
 
+#TODO: extend Curses::Window para OOP and change
+# @window creation
 module NeedForType
   class InputWindow
 
@@ -18,15 +20,26 @@ module NeedForType
       @window.getch
     end
 
-    def add_input_content(char) 
-      @content = @content + char
-
+    def add_input_content(content)
       @window.clear
       @window.box('|', '-')
       @window.setpos(1, 2)
-      @window.addstr(@content)
+      @window.addstr(content)
       @window.refresh
     end
 
+    def beep
+      Curses.beep
+    end
+
+    def clear
+      @window.clear
+    end
+
+    def refresh
+      @window.box('|', '-')
+      @window.setpos(1, 2)
+      @window.refresh
+    end
   end
 end

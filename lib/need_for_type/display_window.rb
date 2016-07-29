@@ -1,61 +1,60 @@
 require 'curses'
 
 module NeedForType
-  class DisplayWindow 
+  class DisplayWindow < Curses::Window
 
     def initialize
-      third_lines = Curses.lines / 3
+      super((Curses.lines / 3) * 2, Curses.cols, 0, 0)
 
-      @window = Curses::Window.new(third_lines * 2, Curses.cols, 0, 0)
-      @window.box("|", "-")
-      @window.refresh
+      self.box("|", "-")
+      self.refresh
     end
 
     def render_menu(selected_option)
-      @window.clear
-      @window.box("|", "-")
+      self.clear
+      self.box("|", "-")
 
-      @window.setpos(1,2)
-      @window.attrset(Curses.color_pair(1) | Curses::A_NORMAL)
-      @window.addstr("Need For Type")
+      self.setpos(1,2)
+      self.attrset(Curses.color_pair(1) | Curses::A_NORMAL)
+      self.addstr("Need For Type")
 
       standout?(0, selected_option)
-      @window.setpos(3,2)
-      @window.addstr("1. Easy")
+      self.setpos(3,2)
+      self.addstr("1. Easy")
 
       standout?(1, selected_option)
-      @window.setpos(4,2)
-      @window.addstr("2. Medium")
+      self.setpos(4,2)
+      self.addstr("2. Medium")
 
       standout?(2, selected_option)
-      @window.setpos(5,2)
-      @window.addstr("3. Hard")
+      self.setpos(5,2)
+      self.addstr("3. Hard")
 
-      @window.refresh
+      self.refresh
     end
 
     def render_game_text(text)
-      @window.clear
-      @window.box('|', '-')
-      @window.setpos(1, 2)
-      @window.addstr(text)
-      @window.refresh
+      self.clear
+      self.box('|', '-')
+      self.setpos(1, 2)
+      self.addstr(text)
+      self.refresh
     end
 
     def standout?(option, option_input)
       if option_input == option
-        @window.attrset(Curses.color_pair(1) | Curses::A_STANDOUT)
+        self.attrset(Curses.color_pair(1) | Curses::A_STANDOUT)
       else
-        @window.attrset(Curses.color_pair(1) | Curses::A_NORMAL)
+        self.attrset(Curses.color_pair(1) | Curses::A_NORMAL)
       end
     end
 
     #def render_close_message
     ## TODO: make this pretty
-    #@window.clear
-    #@window.setpos(2,2)
-    #@window.addstr("Thank you goodbye!")
-    #@window.refresh
+    #self.clear
+    #self.setpos(2,2)
+    #self.addstr("Thank you goodbye!")
+    #self.refresh
     #sleep 3
     #end
 

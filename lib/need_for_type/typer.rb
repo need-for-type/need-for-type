@@ -86,8 +86,7 @@ module NeedForType
     private
 
     def reset_input
-      @input_window.clear
-      @input_window.refresh
+      @input_window.render
       @input_words << @word
       @word = ""
     end

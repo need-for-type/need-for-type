@@ -4,7 +4,7 @@ class FileManager
   attr_accessor :content
 
   def initialize(difficulty)
-    @difficulty = difficulty_to_s(difficulty) 
+    @difficulty = difficulty_to_s(difficulty)
     @path = "#{FILE_DIR}/#{@difficulty}/"
   end
 
@@ -19,7 +19,7 @@ class FileManager
 
   private
 
-  def difficulty_to_s(difficulty) 
+  def difficulty_to_s(difficulty)
     case difficulty
     when 0
       'easy'

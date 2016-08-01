@@ -1,13 +1,12 @@
-require 'logger'
 require 'curses'
 
+require 'need_for_type/states'
+
 module NeedForType::States
-  class Menu
-    attr_accessor :option
+  class Menu < State
 
     def initialize(display_window, input_window)
-      @display_window = display_window 
-      @input_window = input_window 
+      super(display_window, input_window)
 
       @option = 0
     end
@@ -22,10 +21,10 @@ module NeedForType::States
       elsif input == Curses::Key::DOWN
         @option = (@option + 1) % 3
       elsif input == Curses::Key::ENTER || input == 10
-        return :game
+        return NeedForType::States::Game.new(@display_window, @input_window, @option) 
       end
 
-      return :menu
+      return self
     end
   end
 end

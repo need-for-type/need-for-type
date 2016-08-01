@@ -1,12 +1,15 @@
-require 'logger'
 require 'curses'
 
-module NeedForType::States
-  class Game 
-    def initialize(display_window, input_window)
-      @display_window = display_window 
-      @input_window = input_window 
+require 'need_for_type/states'
+require 'need_for_type/file_manager'
 
+module NeedForType::States
+  class Game < State 
+
+    def initialize(display_window, input_window, difficulty)
+      super(display_window, input_window)
+
+      @difficulty = difficulty
       @state = :init_game
       @text = ''
     end
@@ -23,7 +26,7 @@ module NeedForType::States
     private
 
     def handle_init_game
-      @file_manager = FileManager.new(@option)
+      @file_manager = NeedForType::FileManager.new(@difficulty)
 
       @text = @file_manager.get_random_text
       prepare_words
@@ -35,7 +38,7 @@ module NeedForType::States
 
       @state = :in_game
 
-      return :game
+      return self
     end
 
     def handle_in_game
@@ -59,7 +62,7 @@ module NeedForType::States
         @input_window.beep
       end
 
-      return :game
+      return self
     end
 
     def reset_input

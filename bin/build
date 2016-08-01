@@ -1,0 +1,5 @@
+#!/bin/bash
+
+gem build need_for_type.gemspec
+
+gem install need_for_type-0.1.0.gem

@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'curses'
+require 'need_for_type'
+require 'need_for_type/typer'
+
+Curses.init_screen
+Curses.noecho
+
+begin
+  typer = NeedForType::Typer.new
+  typer.play
+ensure
+  Curses.close_screen
+end

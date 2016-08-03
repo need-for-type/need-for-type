@@ -32,7 +32,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Build & Run
 
-When in development user the `bin/build` scrpit to build and intall de gem development version, then run the `bin/need_for_type` to run the gem.
+When in development use the `./bin/build` script to build and install the development version of the gem, then run the `./bin/need_for_type` to run the gem.
 
 ## Contributing
 

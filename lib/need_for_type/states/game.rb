@@ -14,76 +14,98 @@ module NeedForType::States
       @text = ''
     end
 
+    # Takes action according to the current @state 
+    #
+    # @state can take the following values
+    #
+    # - :init_game Game initialization
+    # - :in_game_1 Get input 
+    # - :in_game_2 Right input state
+    # - :in_game_3 Wrong input state
     def update
       case @state
       when :init_game
         handle_init_game
-      when :in_game
-        handle_in_game
+      when :in_game_1
+        handle_in_game_1
+      when :in_game_2
+        handle_in_game_2
+      when :in_game_3
+        handle_in_game_3
+      when :end_game
+        handle_end_game
       end
     end
 
     private
 
     def handle_init_game
+      @chars_completed = 0
+      @word = ''
+
       file_manager = NeedForType::FileManager.new(@difficulty)
-
       @text = file_manager.get_random_text
-      prepare_words
-      @display_window.render_game_text(@text)
+      @split_text = @text.split('')
+      @display_window.render_game_text(@split_text, @chars_completed)
 
-      @word = ""
-      @input_words = []
-      @words_completed = 0
+      @start_time = Time.new
 
-      @state = :in_game
+      @state = :in_game_1
 
       return self
     end
 
-    def handle_in_game
+    # Gets input from user and compares it
+    def handle_in_game_1
       input = @input_window.get_input
-      temp = @word + input
 
-      if compare(temp) && !ended?(temp)
-        @word = temp
-        @input_window.add_input_content(temp)
-        @display_window.render_ingame_text(@file_words, @words_completed)
-      elsif ended?(temp)
-        @word = temp
-        @words_completed+=1
-
-        if @input_words.size == @file_words.size
-          @state = :menu
-        else
-          @display_window.render_ingame_text(@file_words, @words_completed)
-          reset_input
-        end
+      if input == @text[@chars_completed]
+        @state = :in_game_2
       else
-        @display_window.render_ingame_text(@file_words, @words_completed, true)
-        @input_window.add_input_content(@word)
-        @input_window.beep
+        @state = :in_game_3
       end
 
       return self
     end
 
-    def reset_input
-      @input_window.render_display
-      @input_words << @word
-      @word = ""
+    # User input is correct
+    def handle_in_game_2
+      @chars_completed += 1
+
+      if @text[@chars_completed] == ' '
+        @word = ''
+      else
+        @word += @text[@chars_completed]
+      end
+
+      # Render
+      @input_window.render_text(@word)
+      @display_window.render_game_text(@split_text, @chars_completed)
+
+      if @chars_completed == @text.size
+        @state = :end_game
+      else
+        @state = :in_game_1
+      end
+
+      return self
     end
 
-    def ended?(word)
-      @file_words[@words_completed] == word
+    # User input is wrong 
+    def handle_in_game_3
+      @display_window.render_game_text(@split_text, @chars_completed, true)
+
+      @state = :in_game_1
+
+      return self
     end
 
-    def compare(word)
-      @file_words[@words_completed].start_with?(word)
-    end
+    def handle_end_game
+      @end_time = Time.new
 
-    def prepare_words
-      @file_words = @text.split(' ').map { |word| word << ' ' }
+      total_time = @end_time - @start_time
+      
+      return NeedForType::States::Menu.new(@display_window, @input_window)
     end
   end
 end

@@ -5,16 +5,15 @@ module NeedForType
   class InputWindow < Window
 
     def initialize
-      super(Curses.lines / 3, Curses.cols, Curses.lines / 1.5, 0, true)
-      @content = ''
+      super(Curses.lines / 3, Curses.cols, Curses.lines / 1.5, 0)
     end
 
     def get_input
       self.getch
     end
 
-    def add_input_content(content)
-      self.render_display { self.addstr(content) }
+    def render_text(text)
+      self.render { self.addstr(text) }
     end
 
     def beep

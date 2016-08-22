@@ -3,10 +3,11 @@
 require 'curses'
 require 'need_for_type'
 require 'need_for_type/typer'
+require 'need_for_type/window'
 
 Curses.init_screen
-Curses.start_color
 Curses.noecho
+NeedForType::Window.init_colors
 
 begin
   typer = NeedForType::Typer.new

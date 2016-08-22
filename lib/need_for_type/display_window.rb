@@ -1,62 +1,81 @@
 require 'curses'
+require 'need_for_type/window'
 
 module NeedForType
-  class DisplayWindow < Curses::Window
+  class DisplayWindow < Window
 
     def initialize
-      super((Curses.lines / 3) * 2, Curses.cols, 0, 0)
-
-      self.box("|", "-")
-      self.refresh
+      super(Curses.lines, Curses.cols, 0, 0)
+      Curses.curs_set(CURSOR_INVISIBLE)
     end
 
     def render_menu(selected_option)
-      self.clear
-      self.box("|", "-")
+      self.render do
+        self.setpos(2, 4)
+        self.render_text("Need For Type", GREEN, NORMAL)
 
-      self.setpos(1,2)
-      self.attrset(Curses.color_pair(1) | Curses::A_NORMAL)
-      self.addstr("Need For Type")
+        self.setpos(4, 4)
+        mode = standout_mode(0, selected_option)
+        self.render_text("1. Easy", WHITE, mode)
 
-      standout?(0, selected_option)
-      self.setpos(3,2)
-      self.addstr("1. Easy")
+        self.setpos(5, 4)
+        mode = standout_mode(1, selected_option)
+        self.render_text("2. Medium", WHITE, mode)
 
-      standout?(1, selected_option)
-      self.setpos(4,2)
-      self.addstr("2. Medium")
+        self.setpos(6, 4)
+        mode = standout_mode(2, selected_option)
+        self.render_text("3. Hard", WHITE, mode)
 
-      standout?(2, selected_option)
-      self.setpos(5,2)
-      self.addstr("3. Hard")
-
-      self.refresh
-    end
-
-    def render_game_text(text)
-      self.clear
-      self.box('|', '-')
-      self.setpos(1, 2)
-      self.addstr(text)
-      self.refresh
-    end
-
-    def standout?(option, option_input)
-      if option_input == option
-        self.attrset(Curses.color_pair(1) | Curses::A_STANDOUT)
-      else
-        self.attrset(Curses.color_pair(1) | Curses::A_NORMAL)
+        self.setpos(8, 4)
+        mode = standout_mode(3, selected_option)
+        self.render_text("Exit", WHITE, mode)
       end
     end
 
-    #def render_close_message
-    ## TODO: make this pretty
-    #self.clear
-    #self.setpos(2,2)
-    #self.addstr("Thank you goodbye!")
-    #self.refresh
-    #sleep 3
-    #end
+    def standout_mode(option, selected_option)
+      selected_option == option ? STANDOUT : NORMAL
+    end
 
+    def render_game_text(text, chars_completed, failed = false)
+      current_color = failed ? RED : YELLOW
+      completed = text[0, chars_completed - 1]
+      tail = text[chars_completed + 1, text.length]
+
+      self.render do
+        self.setpos(2,4)
+        self.render_multiple_text(GREEN, NORMAL) { completed.each { |c| self.addstr(c) } }
+        self.render_text(c, color, NORMAL)
+        self.render_multiple_text(WHITE, NORMAL) { tail.each { |c| self.addstr(c) } }
+      end
+    end
+
+    def render_game_text(text, chars_completed, failed = false)
+      self.render do
+        self.setpos(2, 4)
+        text.each_with_index do |c, i|
+          if i < chars_completed
+            self.render_text(c, GREEN, NORMAL)
+          elsif i == chars_completed
+            color = failed ? RED : YELLOW
+            self.render_text(c, color, NORMAL)
+          else
+            self.render_text(c, WHITE, NORMAL)
+          end
+        end
+      end
+    end
+
+    def render_score(time, wpm, accuracy)
+      self.render do
+        self.setpos(2, 4)
+        self.render_text("Time: #{time.round(2)} sec", GREEN, NORMAL)
+
+        self.setpos(3, 4)
+        self.render_text("WPM: #{wpm.round}", GREEN, NORMAL)
+
+        self.setpos(4, 4)
+        self.render_text("Accuracy: #{accuracy.round(2)} %", GREEN, NORMAL)
+      end
+    end
   end
 end

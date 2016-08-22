@@ -13,7 +13,10 @@ module NeedForType
     end
 
     def render_text(text)
-      self.render { self.addstr(text) }
+      self.render do
+        self.setpos(1, 2)
+        self.addstr(text)
+      end
     end
 
     def beep

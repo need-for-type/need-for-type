@@ -44,5 +44,18 @@ module NeedForType
         end
       end
     end
+
+    def render_score(time, wpm, accuracy)
+      self.render do
+        self.setpos(1, 2)
+        self.render_text("Time: #{time}", GREEN, NORMAL)
+
+        self.setpos(2, 2)
+        self.render_text("WPM: #{wpm}", GREEN, NORMAL)
+
+        self.setpos(3, 2)
+        self.render_text("Accuracy: #{accuracy}", GREEN, NORMAL)
+      end
+    end
   end
 end

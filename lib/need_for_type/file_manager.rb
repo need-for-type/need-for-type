@@ -12,7 +12,7 @@ module NeedForType
       random_file = rand(1..directory.count)
 
       # TODO: apply markov's chain's to the text
-      @content = File.read("#{@path}/#{random_file}.txt")
+      @content = File.read("#{@path}/#{random_file}.txt").strip
     end
 
     private

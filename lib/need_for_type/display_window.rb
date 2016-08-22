@@ -37,12 +37,25 @@ module NeedForType
     end
 
     def render_game_text(text, chars_completed, failed = false)
+      current_color = failed ? RED : YELLOW
+      completed = text[0, chars_completed - 1]
+      tail = text[chars_completed + 1, text.length]
+
+      self.render do
+        self.setpos(2,4)
+        self.render_multiple_text(GREEN, NORMAL) { completed.each { |c| self.addstr(c) } }
+        self.render_text(c, color, NORMAL)
+        self.render_multiple_text(WHITE, NORMAL) { tail.each { |c| self.addstr(c) } }
+      end
+    end
+
+    def render_game_text(text, chars_completed, failed = false)
       self.render do
         self.setpos(2, 4)
         text.each_with_index do |c, i|
-          if i < chars_completed 
+          if i < chars_completed
             self.render_text(c, GREEN, NORMAL)
-          elsif i == chars_completed 
+          elsif i == chars_completed
             color = failed ? RED : YELLOW
             self.render_text(c, color, NORMAL)
           else

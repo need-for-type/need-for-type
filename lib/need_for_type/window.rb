@@ -49,6 +49,12 @@ module NeedForType
       self.attroff(Curses.color_pair(color) | mode)
     end
 
+    def render_multiple_text(color = WHITE, mode = NORMAL)
+      self.attron(Curses.color_pair(color) | mode)
+      yield
+      self.attroff(Curses.color_pair(color) | mode)
+    end
+
     def get_input
       self.getch
     end

@@ -26,12 +26,12 @@ module NeedForType::States
       case @state
       when :init_game
         handle_init_game
-      when :in_game_1
-        handle_in_game_1
-      when :in_game_2
-        handle_in_game_2
-      when :in_game_3
-        handle_in_game_3
+      when :in_game_get_input
+        handle_in_game_get_input
+      when :in_game_valid_input
+        handle_in_game_valid_input
+      when :in_game_invalid_input
+        handle_in_game_invalid_input
       when :end_game
         handle_end_game
       end
@@ -53,27 +53,27 @@ module NeedForType::States
 
       @start_time = Time.now
 
-      @state = :in_game_1
+      @state = :in_game_get_input
 
       return self
     end
 
     # Gets input from user and compares it
-    def handle_in_game_1
+    def handle_in_game_get_input
       input = @display_window.get_input
       @total_taps += 1
 
       if input == @text[@chars_completed]
-        @state = :in_game_2
+        @state = :in_game_valid_input
       else
-        @state = :in_game_3
+        @state = :in_game_invalid_input
       end
 
       return self
     end
 
     # User input is correct
-    def handle_in_game_2
+    def handle_in_game_valid_input
       @chars_completed += 1
       @correct_taps += 1
 
@@ -91,16 +91,16 @@ module NeedForType::States
       # Render
       @display_window.render_game_text(@split_text, @chars_completed)
 
-      @state = :in_game_1
+      @state = :in_game_get_input
 
       return self
     end
 
     # User input is wrong 
-    def handle_in_game_3
+    def handle_in_game_invalid_input
       @display_window.render_game_text(@split_text, @chars_completed, true)
 
-      @state = :in_game_1
+      @state = :in_game_get_input
 
       return self
     end

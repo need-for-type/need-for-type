@@ -5,7 +5,7 @@ module NeedForType
   class DisplayWindow < Window
 
     def initialize
-      super((Curses.lines / 3) * 2, Curses.cols, 0, 0, false)
+      super(Curses.lines, Curses.cols, 0, 0)
       Curses.curs_set(CURSOR_INVISIBLE)
     end
 

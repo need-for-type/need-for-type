@@ -5,8 +5,8 @@ require 'need_for_type/states'
 module NeedForType::States
   class Score < State
 
-    def initialize(display_window, input_window, time, wpm, accuracy)
-      super(display_window, input_window)
+    def initialize(display_window, time, wpm, accuracy)
+      super(display_window)
       @time = time
       @wpm = wpm
       @accuracy = accuracy 
@@ -15,10 +15,10 @@ module NeedForType::States
     def update
       @display_window.render_score(@time, @wpm, @accuracy)
 
-      input = @input_window.get_input
+      input = @display_window.get_input
 
       if input == Curses::Key::ENTER || input == 10
-        return NeedForType::States::Menu.new(@display_window, @input_window)
+        return NeedForType::States::Menu.new(@display_window)
       end
 
       return self

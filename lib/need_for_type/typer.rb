@@ -1,7 +1,6 @@
 require 'curses'
 
 require 'need_for_type/display_window'
-require 'need_for_type/input_window'
 
 require 'need_for_type/states'
 
@@ -10,9 +9,8 @@ module NeedForType
 
     def initialize
       display_window = NeedForType::DisplayWindow.new
-      input_window = NeedForType::InputWindow.new
 
-      @state = NeedForType::States::Menu.new(display_window, input_window)
+      @state = NeedForType::States::Menu.new(display_window)
     end
 
     def play

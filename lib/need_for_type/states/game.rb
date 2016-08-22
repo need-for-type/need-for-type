@@ -6,8 +6,8 @@ require 'need_for_type/file_manager'
 module NeedForType::States
   class Game < State
 
-    def initialize(display_window, input_window, difficulty)
-      super(display_window, input_window)
+    def initialize(display_window, difficulty)
+      super(display_window)
 
       @difficulty = difficulty
       @state = :init_game
@@ -60,7 +60,7 @@ module NeedForType::States
 
     # Gets input from user and compares it
     def handle_in_game_1
-      input = @input_window.get_input
+      input = @display_window.get_input
       @total_taps += 1
 
       if input == @text[@chars_completed]
@@ -89,7 +89,6 @@ module NeedForType::States
       end
 
       # Render
-      @input_window.render_text(@word)
       @display_window.render_game_text(@split_text, @chars_completed)
 
       @state = :in_game_1
@@ -113,8 +112,7 @@ module NeedForType::States
       wpm = (@text.split.size * 60) / total_time
       accuracy = (@correct_taps.to_f / @total_taps.to_f) * 100
       
-      return NeedForType::States::Score.new(@display_window, @input_window,
-                                            total_time, wpm, accuracy)
+      return NeedForType::States::Score.new(@display_window, total_time, wpm, accuracy)
     end
   end
 end

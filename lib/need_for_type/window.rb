@@ -16,11 +16,11 @@ module NeedForType
     NORMAL = Curses::A_NORMAL
     STANDOUT = Curses::A_STANDOUT
 
-    def initialize(lines, cols, top, left, keypad = true)
+    def initialize(lines, cols, top, left)
       super(lines, cols, top, left)
 
       self.box('|', '-')
-      self.keypad = keypad
+      self.keypad = true 
       self.refresh
     end
 
@@ -47,6 +47,10 @@ module NeedForType
       self.attron(Curses.color_pair(color) | mode)
       self.addstr(text)
       self.attroff(Curses.color_pair(color) | mode)
+    end
+
+    def get_input
+      self.getch
     end
   end
 end

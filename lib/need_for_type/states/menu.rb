@@ -17,10 +17,11 @@ module NeedForType::States
       input = @input_window.get_input
 
       if input == Curses::Key::UP
-        @option = (@option - 1) % 3
+        @option = (@option - 1) % 4
       elsif input == Curses::Key::DOWN
-        @option = (@option + 1) % 3
+        @option = (@option + 1) % 4
       elsif input == Curses::Key::ENTER || input == 10
+        exit if @option == 3
         return NeedForType::States::Game.new(@display_window, @input_window, @option) 
       end
 

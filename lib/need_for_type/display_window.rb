@@ -25,6 +25,10 @@ module NeedForType
         self.setpos(6, 4)
         mode = standout_mode(2, selected_option)
         self.render_text("3. Hard", WHITE, mode)
+
+        self.setpos(8, 4)
+        mode = standout_mode(3, selected_option)
+        self.render_text("Exit", WHITE, mode)
       end
     end
 

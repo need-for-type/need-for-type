@@ -14,7 +14,7 @@ module NeedForType::States
       @text = ''
     end
 
-    # Takes action according to the current @state 
+    # Takes action according to the current @state
     def update
       case @state
       when :init_game
@@ -101,7 +101,7 @@ module NeedForType::States
       return self
     end
 
-    # User input is wrong 
+    # User input is wrong
     def handle_in_game_invalid_input
       Curses.beep
 
@@ -118,8 +118,8 @@ module NeedForType::States
       total_time = @end_time - @start_time
       wpm = (@text.split.size * 60) / total_time
       accuracy = (@correct_taps.to_f / @total_taps.to_f) * 100
-      
-      return NeedForType::States::Score.new(@display_window, total_time, wpm, accuracy)
+
+      return NeedForType::States::Score.new(@display_window, total_time, wpm, accuracy, @difficulty)
     end
   end
 end

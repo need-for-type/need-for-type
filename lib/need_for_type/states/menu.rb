@@ -14,15 +14,9 @@ module NeedForType::States
     def update
       @display_window.render_menu(@option)
 
-      input = @display_window.get_input
-
-      if input == Curses::Key::UP
-        @option = (@option - 1) % 4
-      elsif input == Curses::Key::DOWN
-        @option = (@option + 1) % 4
-      elsif input == Curses::Key::ENTER || input == 10
+      input_worker(4) do
         exit if @option == 3
-        return NeedForType::States::Game.new(@display_window, @option) 
+        return NeedForType::States::Game.new(@display_window, @option)
       end
 
       return self

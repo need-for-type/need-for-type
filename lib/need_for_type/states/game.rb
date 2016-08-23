@@ -15,13 +15,6 @@ module NeedForType::States
     end
 
     # Takes action according to the current @state 
-    #
-    # @state can take the following values
-    #
-    # - :init_game Game initialization
-    # - :in_game_1 Get input 
-    # - :in_game_2 Right input state
-    # - :in_game_3 Wrong input state
     def update
       case @state
       when :init_game
@@ -98,6 +91,8 @@ module NeedForType::States
 
     # User input is wrong 
     def handle_in_game_invalid_input
+      Curses.beep
+
       @display_window.render_game_text(@split_text, @chars_completed, true)
 
       @state = :in_game_get_input

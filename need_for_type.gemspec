@@ -6,12 +6,12 @@ require 'need_for_type/version'
 Gem::Specification.new do |spec|
   spec.name          = "need_for_type"
   spec.version       = NeedForType::VERSION
-  spec.authors       = ["tiagonbotelho", "jbamaro"]
+  spec.authors       = ["tiagonbotelho", "jbernardo95"]
   spec.email         = ["tiagonbotelho@gmail.com", "jbamaro95@gmail.com"]
 
   spec.summary       = %q{A terminal typeracer}
-  spec.description   = %q{A terminal typeracer}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.description   = %q{need-for-type is a terminal type racer inpired by Nitro Type}
+  spec.homepage      = "https://github.com/jbernardo95/need-for-type"
   spec.license       = "MIT"
 
   spec.files         = Dir['README.md', 'Gemfile', 'lib/**/*', 'assets/**/*.txt']

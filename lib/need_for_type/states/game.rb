@@ -41,8 +41,7 @@ module NeedForType::States
 
       file_manager = NeedForType::FileManager.new(@difficulty)
       @text = file_manager.get_random_text
-      @split_text = @text.split('')
-      @display_window.render_game_text(@split_text, @chars_completed)
+      @display_window.render_game_text(@text, @chars_completed)
 
       @start_time = Time.now
 
@@ -82,7 +81,7 @@ module NeedForType::States
       end
 
       # Render
-      @display_window.render_game_text(@split_text, @chars_completed)
+      @display_window.render_game_text(@text, @chars_completed)
 
       @state = :in_game_get_input
 
@@ -93,7 +92,7 @@ module NeedForType::States
     def handle_in_game_invalid_input
       Curses.beep
 
-      @display_window.render_game_text(@split_text, @chars_completed, true)
+      @display_window.render_game_text(@text, @chars_completed, true)
 
       @state = :in_game_get_input
 

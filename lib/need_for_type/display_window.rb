@@ -36,6 +36,13 @@ module NeedForType
       selected_option == option ? STANDOUT : NORMAL
     end
 
+    def render_start_game
+      self.render do
+        self.set_render_pos(2, 4)
+        self.render_text("To start playing click ENTER", GREEN, NORMAL)
+      end
+    end
+
     def render_game_text(text, chars_completed, failed = false)
       color = failed ? RED : YELLOW
       head = text[0, chars_completed] || ''

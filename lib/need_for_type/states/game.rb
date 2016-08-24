@@ -19,6 +19,8 @@ module NeedForType::States
       case @state
       when :init_game
         handle_init_game
+      when :start_game
+        handle_start_game
       when :in_game_get_input
         handle_in_game_get_input
       when :in_game_valid_input
@@ -41,11 +43,24 @@ module NeedForType::States
 
       file_manager = NeedForType::FileManager.new(@difficulty)
       @text = file_manager.get_random_text
-      @display_window.render_game_text(@text, @chars_completed)
 
-      @start_time = Time.now
+      @state = :start_game
 
-      @state = :in_game_get_input
+      return self
+    end
+
+    def handle_start_game
+      @display_window.render_start_game
+
+      input = @display_window.get_input
+
+      if input == Curses::Key::ENTER || input == 10
+        @display_window.render_game_text(@text, @chars_completed)
+
+        @start_time = Time.now
+
+        @state = :in_game_get_input
+      end
 
       return self
     end

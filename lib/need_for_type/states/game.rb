@@ -56,9 +56,7 @@ module NeedForType::States
 
       if input == Curses::Key::ENTER || input == 10
         @display_window.render_game_text(@text, @chars_completed)
-
         @start_time = Time.now
-
         @state = :in_game_get_input
       end
 

@@ -45,16 +45,16 @@ module NeedForType
 
     def render_game_text(text, chars_completed, failed = false)
       color = failed ? RED : YELLOW
-      head = text[0, chars_completed] || ''
-      tail = text[chars_completed + 1, text.length] || ''
+      completed = text[0, chars_completed] || ''
+      remaining = text[chars_completed + 1, text.length] || ''
 
       @current_line = 2
       @current_col = 4
 
       self.render do
-        self.render_text(head, GREEN, NORMAL)
+        self.render_text(completed, GREEN, NORMAL)
         self.render_text(text[chars_completed], color, NORMAL)
-        self.render_text(tail, WHITE, NORMAL)
+        self.render_text(remaining, WHITE, NORMAL)
       end
     end
 

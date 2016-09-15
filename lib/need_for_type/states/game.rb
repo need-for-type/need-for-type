@@ -119,7 +119,7 @@ module NeedForType::States
       wpm = (@text.split.size * 60) / total_time
       accuracy = (@correct_taps.to_f / @total_taps.to_f) * 100
 
-      return NeedForType::States::Score.new(@display_window, total_time, wpm, accuracy, @difficulty)
+      return NeedForType::States::End.new(@display_window, total_time, wpm, accuracy, @difficulty)
     end
   end
 end

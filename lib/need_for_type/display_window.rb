@@ -60,30 +60,30 @@ module NeedForType
 
     def render_score(time, wpm, accuracy, selected_option)
       self.render do
-        self.render_multiple_text(GREEN, NORMAL) do
-          self.setpos(2, 4)
+        self.render_multiple_text(GREEN) do
+          self.set_render_pos(4, 2)
           self.addstr("Congratulations you crossed the finish line!")
 
-          self.setpos(4, 4)
+          self.set_render_pos(4, 4)
           self.addstr("Time: #{time.round(2)} sec")
 
-          self.setpos(5, 4)
+          self.set_render_pos(5, 4)
           self.addstr("WPM: #{wpm.round}")
 
-          self.setpos(6, 4)
+          self.set_render_pos(6, 4)
           self.addstr("Accuracy: #{accuracy.round(2)} %")
         end
 
-        self.setpos(8, 4)
-        mode = self.standout_mode(0, selected_option)
+        self.set_render_pos(8, 4)
+        mode = standout_mode(0, selected_option)
         self.render_text("1. Reset", WHITE, mode)
 
-        self.setpos(9, 4)
-        mode = self.standout_mode(1, selected_option)
+        self.set_render_pos(9, 4)
+        mode = standout_mode(1, selected_option)
         self.render_text("2. Main Menu", WHITE, mode)
 
-        self.setpos(10, 4)
-        mode = self.standout_mode(2, selected_option)
+        self.set_render_pos(10, 4)
+        mode = standout_mode(2, selected_option)
         self.render_text("3. Exit", WHITE, mode)
       end
     end

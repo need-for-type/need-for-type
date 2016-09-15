@@ -3,7 +3,7 @@ require 'curses'
 require 'need_for_type/states'
 
 module NeedForType::States
-  class Score < State
+  class End < Menu
 
     def initialize(display_window, time, wpm, accuracy, difficulty)
       super(display_window)
@@ -18,11 +18,13 @@ module NeedForType::States
       @display_window.render_score(@time, @wpm, @accuracy, @option)
 
       input_worker(3) do
-        exit if @option == 2
-        return NeedForType::States::Game.new(@display_window, @difficulty) if @option == 0
-        return NeedForType::States::Menu.new(@display_window) if @option == 1
+        case @option
+        when 0
+          return NeedForType::States::Game.new(@display_window, @difficulty)
+        when 1
+          return NeedForType::States::Start.new(@display_window)
+        end
       end
-
       return self
     end
   end

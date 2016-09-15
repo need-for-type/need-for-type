@@ -10,7 +10,7 @@ module NeedForType
     def initialize
       display_window = NeedForType::DisplayWindow.new
 
-      @state = NeedForType::States::Menu.new(display_window)
+      @state = NeedForType::States::Start.new(display_window)
     end
 
     def play

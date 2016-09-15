@@ -4,6 +4,5 @@ module NeedForType::States
     def initialize(display_window)
       @display_window = display_window
     end
-
   end
 end

@@ -27,7 +27,7 @@ module NeedForType
       @current_col = COL_PADDING
 
       self.box('|', '-')
-      self.keypad = true 
+      self.keypad = true
       self.refresh
     end
 

@@ -11,7 +11,6 @@ module NeedForType::States
       @time = time
       @wpm = wpm
       @accuracy = accuracy
-      @option = 0
     end
 
     def update
@@ -25,6 +24,7 @@ module NeedForType::States
           return NeedForType::States::Start.new(@display_window)
         end
       end
+
       return self
     end
   end

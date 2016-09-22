@@ -21,7 +21,7 @@ module NeedForType::States
       # Stats
       @stats = { total_time: 0,
                  wpm: 0,
-                 accuracy: 0 }
+                 accuracy: 100 }
     end
 
     # Takes action according to the current @state
@@ -120,9 +120,7 @@ module NeedForType::States
     def handle_end_game
       calculate_stats
 
-      return NeedForType::States::End.new(@display_window,
-                                          @stats,
-                                          @difficulty)
+      return NeedForType::States::End.new(@display_window, @stats, @difficulty)
     end
 
     def calculate_stats

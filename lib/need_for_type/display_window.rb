@@ -51,14 +51,7 @@ module NeedForType
       self.render_box do
         # Stats
         self.render_with_color(GREEN) do
-          self.set_render_pos(2, 4)
-          self.addstr("Time: #{stats[:total_time].round(2)} sec")
-
-          self.set_render_pos(2, 21)
-          self.addstr("WPM: #{stats[:wpm].round}")
-
-          self.set_render_pos(2, 30)
-          self.addstr("Accuracy: #{stats[:accuracy].round(2)} %")
+          render_stats(stats, 2, 4, :horizontal)
         end
 
         # Text
@@ -75,14 +68,7 @@ module NeedForType
           self.set_render_pos(3, 4)
           self.addstr("Congratulations you crossed the finish line!")
 
-          self.set_render_pos(5, 4)
-          self.addstr("Time: #{stats[:total_time].round(2)} sec")
-
-          self.set_render_pos(6, 4)
-          self.addstr("WPM: #{stats[:wpm].round}")
-
-          self.set_render_pos(7, 4)
-          self.addstr("Accuracy: #{stats[:accuracy].round(2)} %")
+          render_stats(stats, 5, 4, :vertical)
         end
 
         self.set_render_pos(9, 4)
@@ -96,6 +82,26 @@ module NeedForType
         self.set_render_pos(11, 4)
         mode = standout_mode(2, selected_option)
         self.render_text("3. Exit", WHITE, mode)
+      end
+    end
+
+    def render_stats(stats, y, x, mode)
+      stats_text = [
+        "Time: #{stats[:total_time].round(2)} sec",
+        "WPM: #{stats[:wpm].round}",
+        "Accuracy: #{stats[:accuracy].round(2)} %"
+      ]
+
+      stats_text.each do |t|
+        self.set_render_pos(y, x)
+        self.addstr(t)
+
+        case mode
+        when :vertical
+          y += 1
+        when :horizontal
+          x += t.size + 4
+        end
       end
     end
   end

@@ -5,16 +5,15 @@ require 'need_for_type/states'
 module NeedForType::States
   class End < Menu
 
-    def initialize(display_window, time, wpm, accuracy, difficulty)
+    def initialize(display_window, stats, difficulty)
       super(display_window)
       @difficulty = difficulty
-      @time = time
-      @wpm = wpm
-      @accuracy = accuracy
+      @stats = stats
+      @option = 0
     end
 
     def update
-      @display_window.render_score(@time, @wpm, @accuracy, @option)
+      @display_window.render_score(@stats, @option)
 
       input_worker(3) do
         case @option

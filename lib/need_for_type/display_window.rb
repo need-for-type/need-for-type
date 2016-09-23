@@ -18,7 +18,7 @@ module NeedForType
     end
 
     def render_menu(selected_option)
-      self.render do
+      self.render_box do
         self.render_need_for_type_ascii_art(2, 4)
 
         self.set_render_pos(12, 4)
@@ -40,46 +40,43 @@ module NeedForType
     end
 
     def render_start_game
-      self.render do
+      self.render_box do
         self.set_render_pos(2, 4)
         self.render_text("To start playing click ENTER", WHITE, NORMAL)
       end
     end
 
-    def render_game_text(text, chars_completed, failed = false)
+    def render_game_text(text, chars_completed, stats, failed = false)
       color = failed ? RED : YELLOW
       completed = text[0, chars_completed] || ''
       remaining = text[chars_completed + 1, text.length] || ''
 
-      @current_line = 2
-      @current_col = 4
+      self.render_box do
+        # Stats
+        self.render_with_color(GREEN) do
+          render_stats(stats, 2, 4, :horizontal)
+        end
 
-      self.render do
+        # Text
+        self.set_render_pos(4, 4)
         self.render_text(completed, GREEN, NORMAL)
         self.render_text(text[chars_completed], color, NORMAL)
         self.render_text(remaining, WHITE, NORMAL)
       end
     end
 
-    def render_score(time, wpm, accuracy, selected_option)
-      self.render do
-        self.render_multiple_text(GREEN) do
+    def render_score(stats, selected_option)
+      self.render_box do
+        self.render_with_color(GREEN) do
           self.set_render_pos(3, 4)
           self.addstr("Congratulations you crossed the finish line!")
 
-          self.set_render_pos(5, 4)
-          self.addstr("Time: #{time.round(2)} sec")
-
-          self.set_render_pos(6, 4)
-          self.addstr("WPM: #{wpm.round}")
-
-          self.set_render_pos(7, 4)
-          self.addstr("Accuracy: #{accuracy.round(2)} %")
+          render_stats(stats, 5, 4, :vertical)
         end
 
         self.set_render_pos(9, 4)
         mode = standout_mode(0, selected_option)
-        self.render_text("1. Reset", WHITE, mode)
+        self.render_text("1. Restart", WHITE, mode)
 
         self.set_render_pos(10, 4)
         mode = standout_mode(1, selected_option)
@@ -100,6 +97,26 @@ module NeedForType
 
     def standout_mode(option, selected_option)
       selected_option == option ? STANDOUT : NORMAL
+    end
+
+    def render_stats(stats, y, x, mode)
+      stats_text = [
+        "Time: #{stats[:total_time].round(2)} sec",
+        "WPM: #{stats[:wpm].round}",
+        "Accuracy: #{stats[:accuracy].round(2)} %"
+      ]
+
+      stats_text.each do |t|
+        self.set_render_pos(y, x)
+        self.addstr(t)
+
+        case mode
+        when :vertical
+          y += 1
+        when :horizontal
+          x += t.size + 4
+        end
+      end
     end
   end
 end

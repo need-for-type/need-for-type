@@ -12,6 +12,16 @@ module NeedForType::States
       @difficulty = difficulty
       @state = :init_game
       @text = ''
+      @word = ''
+
+      @chars_completed = 0
+      @total_taps = 0
+      @correct_taps = 0
+
+      # Stats
+      @stats = { total_time: 0,
+                 wpm: 0,
+                 accuracy: 100 }
     end
 
     # Takes action according to the current @state
@@ -35,12 +45,6 @@ module NeedForType::States
     private
 
     def handle_init_game
-      @chars_completed = 0
-      @word = ''
-
-      @total_taps = 0
-      @correct_taps = 0
-
       file_manager = NeedForType::FileManager.new(@difficulty)
       @text = file_manager.get_random_text
 
@@ -55,7 +59,7 @@ module NeedForType::States
       input = @display_window.get_input
 
       if input == Curses::Key::ENTER || input == 10
-        @display_window.render_game_text(@text, @chars_completed)
+        @display_window.render_game_text(@text, @chars_completed, @stats)
         @start_time = Time.now
         @state = :in_game_get_input
       end
@@ -73,6 +77,8 @@ module NeedForType::States
       else
         @state = :in_game_invalid_input
       end
+
+      calculate_stats
 
       return self
     end
@@ -93,8 +99,7 @@ module NeedForType::States
         @word += @text[@chars_completed]
       end
 
-      # Render
-      @display_window.render_game_text(@text, @chars_completed)
+      @display_window.render_game_text(@text, @chars_completed, @stats)
 
       @state = :in_game_get_input
 
@@ -105,7 +110,7 @@ module NeedForType::States
     def handle_in_game_invalid_input
       Curses.beep
 
-      @display_window.render_game_text(@text, @chars_completed, true)
+      @display_window.render_game_text(@text, @chars_completed, @stats, true)
 
       @state = :in_game_get_input
 
@@ -113,13 +118,17 @@ module NeedForType::States
     end
 
     def handle_end_game
-      @end_time = Time.now
+      calculate_stats
 
-      total_time = @end_time - @start_time
-      wpm = (@text.split.size * 60) / total_time
-      accuracy = (@correct_taps.to_f / @total_taps.to_f) * 100
+      return NeedForType::States::End.new(@display_window, @stats, @difficulty)
+    end
 
-      return NeedForType::States::End.new(@display_window, total_time, wpm, accuracy, @difficulty)
+    def calculate_stats
+      current_time = Time.now
+
+      @stats[:total_time] = current_time - @start_time
+      @stats[:wpm] = (@text.split.size * 60) / @stats[:total_time]
+      @stats[:accuracy] = (@correct_taps.to_f / @total_taps.to_f) * 100
     end
   end
 end

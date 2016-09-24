@@ -10,9 +10,11 @@ module NeedForType::States
     end
 
     def update
-      @display_window.render_menu(@option)
+      @display_window.render_init_game
 
-      input_worker(4) do
+      input = @display_window.get_input
+
+      if input == Curses::Key::ENTER || input == 10
         return NeedForType::States::Game.new(@display_window, @option)
       end
 

@@ -45,7 +45,7 @@ module NeedForType::States
     private
 
     def handle_init_game
-      file_manager = NeedForType::FileManager.new(@difficulty)
+      file_manager = NeedForType::FileManager.new
       @text = file_manager.get_random_text
 
       @state = :start_game
@@ -54,15 +54,9 @@ module NeedForType::States
     end
 
     def handle_start_game
-      @display_window.render_start_game
-
-      input = @display_window.get_input
-
-      if input == Curses::Key::ENTER || input == 10
-        @display_window.render_game_text(@text, @chars_completed, @stats)
-        @start_time = Time.now
-        @state = :in_game_get_input
-      end
+      @display_window.render_game_text(@text, @chars_completed, @stats)
+      @start_time = Time.now
+      @state = :in_game_get_input
 
       return self
     end

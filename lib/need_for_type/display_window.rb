@@ -3,13 +3,14 @@ require 'need_for_type/window'
 
 module NeedForType
   class DisplayWindow < Window
+    OFFSET = 35
     @@need_for_type_ascii_art =
-"    _   __              __   ____              ______               
-   / | / /__  ___  ____/ /  / __/___  _____   /_  __/_  ______  ___ 
+"    _   __              __   ____              ______
+   / | / /__  ___  ____/ /  / __/___  _____   /_  __/_  ______  ___
   /  |/ / _ \\/ _ \\/ __  /  / /_/ __ \\/ ___/    / / / / / / __ \\/ _ \\
  / /|  /  __/  __/ /_/ /  / __/ /_/ / /       / / / /_/ / /_/ /  __/
-/_/ |_/\\___/\\___/\\__,_/  /_/  \\____/_/       /_/  \\__, / .___/\\___/ 
-                                                 /____/_/           
+/_/ |_/\\___/\\___/\\__,_/  /_/  \\____/_/       /_/  \\__, / .___/\\___/
+                                                 /____/_/
 "
 
     def initialize
@@ -17,32 +18,12 @@ module NeedForType
       Curses.curs_set(CURSOR_INVISIBLE)
     end
 
-    def render_menu(selected_option)
+    def render_init_game
       self.render_box do
-        self.render_need_for_type_ascii_art(2, 4)
+        self.render_need_for_type_ascii_art(2, (Curses.cols/2)-OFFSET)
 
         self.set_render_pos(12, 4)
-        mode = standout_mode(0, selected_option)
-        self.render_text("1. Easy", WHITE, mode)
-
-        self.set_render_pos(13, 4)
-        mode = standout_mode(1, selected_option)
-        self.render_text("2. Medium", WHITE, mode)
-
-        self.set_render_pos(14, 4)
-        mode = standout_mode(2, selected_option)
-        self.render_text("3. Hard", WHITE, mode)
-
-        self.set_render_pos(16, 4)
-        mode = standout_mode(3, selected_option)
-        self.render_text("Exit", WHITE, mode)
-      end
-    end
-
-    def render_start_game
-      self.render_box do
-        self.set_render_pos(2, 4)
-        self.render_text("To start playing click ENTER", WHITE, NORMAL)
+        self.render_text("Click ENTER to start playing", WHITE, NORMAL)
       end
     end
 

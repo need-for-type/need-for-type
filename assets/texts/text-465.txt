@@ -1,0 +1,1 @@
+In 1969 four computers located around the country were in communication with each other through ARPANET. By the mid-1980s, the core of the network was in place, the communications protocols had been determined, and the Internet was live. By the early 1990s the first Internet language (http) was written and the first browser was published. The World Wide Web was born.

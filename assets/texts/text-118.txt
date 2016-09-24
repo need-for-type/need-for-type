@@ -1,0 +1,1 @@
+The pathology of setting a deadline to the earliest articulable date essentially guarantees that the schedule will be missed. Even the strategy of picking the "most likely date" is not particularly safe, as the area to the left of the peak of the curve is barely a third. That says there is a two-thirds chance of missing the deadline.

@@ -1,0 +1,1 @@
+After removal from the oven, the pizza is sliced and plated quickly in a flat cardboard box, which is immediately closed and often taped shut. There is no physical separation after the slicing, so that edge can be ignored and we can treat the pizza, for thermal purposes, as an infinite plane.

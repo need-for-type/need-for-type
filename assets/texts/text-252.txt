@@ -1,0 +1,1 @@
+A computer needs a manager to administer its operations, just as a company needs a manager.  And that is what DOS is. A manager. It manages the operations in your computer.

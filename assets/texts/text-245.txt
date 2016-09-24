@@ -1,0 +1,1 @@
+When you are typing on a typewriter, your input appears directly on paper.  When you are typing on a computer, your input appears on a screen and is transferred to paper after the proper command has been given.

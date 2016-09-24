@@ -77,7 +77,7 @@ module NeedForType
     def render_need_for_type_ascii_art(y = 4, x = 4)
       @@need_for_type_ascii_art.split("\n").each_with_index do |line, i|
         self.set_render_pos(y + i, x)
-        self.render_text(line)
+        self.render_text(line, GREEN, GREEN)
       end
     end
 

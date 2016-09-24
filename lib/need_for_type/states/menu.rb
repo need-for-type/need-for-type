@@ -3,6 +3,7 @@ module NeedForType::States
 
     def initialize(display_window)
       super(display_window)
+      @option = 0
     end
 
     def input_worker(total_menu_options)

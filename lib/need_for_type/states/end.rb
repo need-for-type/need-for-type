@@ -23,6 +23,7 @@ module NeedForType::States
           return NeedForType::States::Start.new(@display_window)
         end
       end
+
       return self
     end
   end

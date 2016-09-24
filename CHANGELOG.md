@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Pre start game state
+- End game menu
+- Need For Type ascii art to the Start state
+- Real time stats display
+
+### Improved
+- End game state
 
 ### Fixed
 - Border override bug

@@ -2,30 +2,16 @@ module NeedForType
   class FileManager
     attr_accessor :content
 
-    def initialize(difficulty)
-      @path = "#{NeedForType::GEM_ROOT}/assets/#{difficulty_to_s(difficulty)}/"
+    def initialize()
+      @path = "#{NeedForType::GEM_ROOT}/assets/texts/"
     end
 
     # Reads random file from difficulty folder
     def get_random_text
-      directory = Dir[@path]
-      random_file = rand(1..directory.count)
+      directory_count = Dir[File.join(@path, '**', '*')].count
+      random_file = rand(1..directory_count)
 
-      # TODO: apply markov's chain's to the text
-      @content = File.read("#{@path}/#{random_file}.txt").strip
-    end
-
-    private
-
-    def difficulty_to_s(difficulty)
-      case difficulty
-      when 0
-        'easy'
-      when 1
-        'medium'
-      when 2
-        'hard'
-      end
+      @content = File.read("#{@path}/text-#{random_file}.txt").strip
     end
   end
 end

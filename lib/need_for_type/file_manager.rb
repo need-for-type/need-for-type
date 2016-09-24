@@ -8,7 +8,7 @@ module NeedForType
 
     # Reads random file from difficulty folder
     def get_random_text
-      directory_count = Dir[File.join(@path, '**', '*')].count { |file| File.file?(file) }
+      directory_count = Dir[File.join(@path, '**', '*')].count
       random_file = rand(1..directory_count)
 
       @content = File.read("#{@path}/text-#{random_file}.txt").strip

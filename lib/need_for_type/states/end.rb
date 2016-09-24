@@ -13,7 +13,7 @@ module NeedForType::States
     end
 
     def update
-      @display_window.render_score(@stats, @option)
+      @display_window.render_end(@stats, @option)
 
       input_worker(3) do
         case @option

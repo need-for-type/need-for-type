@@ -11,9 +11,11 @@ All notable changes to this project will be documented in this file.
 
 ### Improved
 - End game state
+- Start menu
 
 ### Fixed
 - Border override bug
+- Randomized file selection
 
 
 ## Version 0.1.0 - 2016/08/23

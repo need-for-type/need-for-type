@@ -10,7 +10,7 @@ module NeedForType::States
     end
 
     def update
-      @display_window.render_init_game
+      @display_window.render_start
 
       input = @display_window.get_input
 

@@ -38,10 +38,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/jberna
 
 ## Credits 
 
-Sample texts included in this library come from the following sources:
-
-- http://www.lipsum.com/
-- https://medium.com/@kristicoulter
+Texts used in need-for-type were all kindly provided to us by [TypeRacer](http://play.typeracer.com/)
 
 ## License
 

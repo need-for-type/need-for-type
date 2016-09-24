@@ -18,12 +18,17 @@ module NeedForType
       Curses.curs_set(CURSOR_INVISIBLE)
     end
 
-    def render_init_game
+    def render_start
       self.render_box do
-        self.render_need_for_type_ascii_art(2, (Curses.cols/2)-OFFSET)
+        y_ascii = (Curses.lines / 2) - 8
+        x_ascii = (Curses.cols / 2) - OFFSET
+        self.render_need_for_type_ascii_art(y_ascii, x_ascii)
 
-        self.set_render_pos(12, 4)
-        self.render_text("Click ENTER to start playing", WHITE, NORMAL)
+        text = "Click ENTER to start playing"
+        y_text = y_ascii + 8
+        x_text = (Curses.cols / 2) - (text.size / 2)
+        self.set_render_pos(y_text, x_text)
+        self.render_text(text, WHITE, NORMAL)
       end
     end
 
@@ -46,7 +51,7 @@ module NeedForType
       end
     end
 
-    def render_score(stats, selected_option)
+    def render_end(stats, selected_option)
       self.render_box do
         self.render_with_color(GREEN) do
           self.set_render_pos(3, 4)

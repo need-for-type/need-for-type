@@ -10,7 +10,7 @@ module NeedForType::States
       super(display_window)
 
       @difficulty = difficulty
-      @state = :init_game
+      @state = :start_game
       @text = ''
       @word = ''
 
@@ -27,8 +27,6 @@ module NeedForType::States
     # Takes action according to the current @state
     def update
       case @state
-      when :init_game
-        handle_init_game
       when :start_game
         handle_start_game
       when :in_game_get_input
@@ -44,18 +42,12 @@ module NeedForType::States
 
     private
 
-    def handle_init_game
+    def handle_start_game
       file_manager = NeedForType::FileManager.new
       @text = file_manager.get_random_text
-
-      @state = :start_game
-
-      return self
-    end
-
-    def handle_start_game
       @display_window.render_game_text(@text, @chars_completed, @stats)
       @start_time = Time.now
+
       @state = :in_game_get_input
 
       return self

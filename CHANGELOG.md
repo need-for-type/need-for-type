@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased] 
 
+## Version 0.2.1 - 2016/09/26
+
 ### Added
 - Pre start game state
 - End game menu

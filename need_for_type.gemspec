@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{A terminal typeracer}
   spec.description   = %q{need-for-type is a terminal type racer inpired by Nitro Type}
-  spec.homepage      = "https://github.com/jbernardo95/need-for-type"
+  spec.homepage      = "https://github.com/need-for-type/need-for-type"
   spec.license       = "MIT"
 
   spec.files         = Dir['README.md', 'Gemfile', 'lib/**/*', 'assets/**/*.txt']

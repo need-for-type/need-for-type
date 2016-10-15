@@ -51,24 +51,30 @@ module NeedForType
       end
     end
 
-    def render_end(stats, selected_option)
+    def render_end(stats, scores, selected_option)
       self.render_box do
         self.render_with_color(GREEN) do
           self.set_render_pos(3, 4)
           self.addstr("Congratulations you crossed the finish line!")
 
-          render_stats(stats, 5, 4, :vertical)
+          self.set_render_pos(5, 4)
+          self.addstr("Your score:")
         end
+        render_stats(stats, 6, 4, :vertical)
 
-        self.set_render_pos(9, 4)
+        self.set_render_pos(10, 4)
+        self.render_text("Top scores:", GREEN, NORMAL)
+        render_scores(scores, 11, 4)
+
+        self.set_render_pos(17, 4)
         mode = standout_mode(0, selected_option)
         self.render_text("1. Restart", WHITE, mode)
 
-        self.set_render_pos(10, 4)
+        self.set_render_pos(18, 4)
         mode = standout_mode(1, selected_option)
         self.render_text("2. Main Menu", WHITE, mode)
 
-        self.set_render_pos(11, 4)
+        self.set_render_pos(19, 4)
         mode = standout_mode(2, selected_option)
         self.render_text("3. Exit", WHITE, mode)
       end
@@ -87,8 +93,8 @@ module NeedForType
 
     def render_stats(stats, y, x, mode)
       stats_text = [
-        "Time: #{stats[:total_time].round(2)} sec",
         "WPM: #{stats[:wpm].round}",
+        "Time: #{stats[:total_time].round(2)} sec",
         "Accuracy: #{stats[:accuracy].round(2)} %"
       ]
 
@@ -102,6 +108,14 @@ module NeedForType
         when :horizontal
           x += t.size + 4
         end
+      end
+    end
+
+    def render_scores(scores, y, x)
+      scores.each do |s|
+        self.set_render_pos(y, x)
+        self.addstr("#{s['wpm']} wpm #{s['username']}")
+        y += 1
       end
     end
   end

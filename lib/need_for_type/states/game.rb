@@ -44,7 +44,14 @@ module NeedForType::States
 
     def handle_start_game
       file_manager = NeedForType::FileManager.new
-      @text = file_manager.get_random_text
+      file_manager.read_random_text
+      #@text = file_manager.text
+      #@text_id = file_manager.text_id
+
+      # TODO remove this test case
+      @text = "teste need"
+      @text_id = 1
+
       @display_window.render_game_text(@text, @chars_completed, @stats)
       @start_time = Time.now
 
@@ -106,7 +113,7 @@ module NeedForType::States
     def handle_end_game
       calculate_stats
 
-      return NeedForType::States::End.new(@display_window, @stats, @difficulty)
+      return NeedForType::States::End.new(@display_window, @stats, @difficulty, @text_id)
     end
 
     def calculate_stats

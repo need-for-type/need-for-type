@@ -68,15 +68,35 @@ module NeedForType
 
         self.set_render_pos(17, 4)
         mode = standout_mode(0, selected_option)
-        self.render_text("1. Restart", WHITE, mode)
+        self.render_text("1. Submit Score", WHITE, mode)
 
         self.set_render_pos(18, 4)
         mode = standout_mode(1, selected_option)
-        self.render_text("2. Main Menu", WHITE, mode)
+        self.render_text("2. Restart", WHITE, mode)
 
         self.set_render_pos(19, 4)
         mode = standout_mode(2, selected_option)
-        self.render_text("3. Exit", WHITE, mode)
+        self.render_text("3. Main Menu", WHITE, mode)
+
+        self.set_render_pos(20, 4)
+        mode = standout_mode(3, selected_option)
+        self.render_text("4. Exit", WHITE, mode)
+      end
+    end
+    
+    def render_submit_score(username)
+      self.render_box do
+        self.set_render_pos(3, 4)
+        self.render_text("Submit your score !", GREEN, NORMAL)
+
+        self.set_render_pos(5, 4)
+        self.addstr("Type your username...")
+
+        self.set_render_pos(6, 4)
+        self.addstr(username)
+
+        self.set_render_pos(8, 4)
+        self.addstr("Click ENTER to submit")
       end
     end
 

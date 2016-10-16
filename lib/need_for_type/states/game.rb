@@ -45,12 +45,8 @@ module NeedForType::States
     def handle_start_game
       file_manager = NeedForType::FileManager.new
       file_manager.read_random_text
-      #@text = file_manager.text
-      #@text_id = file_manager.text_id
-
-      # TODO remove this test case
-      @text = "teste need"
-      @text_id = 1
+      @text = file_manager.text
+      @text_id = file_manager.text_id
 
       @display_window.render_game_text(@text, @chars_completed, @stats)
       @start_time = Time.now

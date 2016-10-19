@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased] 
 
+### Added
+
+- Top scores (API) rendering on the end state 
+- SubmitScore state to submit score to server
+
 ## Version 0.2.2 - 2016/09/29
 
 ### Fixed

@@ -23,6 +23,7 @@ module NeedForType::States
 
       if input == Curses::Key::ENTER || input == 10
         post_score(@username, @text_id, @stats)
+        @end_state.scores = get_scores(@text_id)
         return @end_state
       elsif input == Curses::Key::BACKSPACE  || input == 127
         @username = @username.chop

@@ -5,6 +5,8 @@ module NeedForType::States
   class End < Menu
     include NeedForType::API
 
+    attr_accessor :scores
+
     def initialize(display_window, stats, difficulty, text_id)
       super(display_window)
       @stats = stats

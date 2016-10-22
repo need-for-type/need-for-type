@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## 0.3.1 - 2016/10/22
+
+### Fixed
+- Scores update after score submission
+
 ## 0.3.0 - 2016/10/22
 
 ### Added

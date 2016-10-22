@@ -132,10 +132,15 @@ module NeedForType
     end
 
     def render_scores(scores, y, x)
-      scores.each do |s|
-        self.set_render_pos(y, x)
-        self.addstr("#{s['wpm']} wpm #{s['username']}")
-        y += 1
+      if scores.empty?
+        self.set_render_pos(y + 1, x)
+        self.addstr("There are no score yet for this text.")
+      else
+        scores.each do |s|
+          self.set_render_pos(y, x)
+          self.addstr("#{s['wpm']} wpm #{s['username']}")
+          y += 1
+        end
       end
     end
   end

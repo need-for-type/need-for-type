@@ -28,8 +28,14 @@ You can run `./bin/console` for an interactive prompt that will allow you to exp
 
 To install the development version of the gem onto your local machine, run `bundle exec rake install`.
 
-To release a new version, update the version number in `version.rb` and update the `CHANGELOG.md` accordingly, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+### How to release a new version
 
+To release a new version follow these steps:
+
+1. Update the version in `version.rb`
+2. Update changes for the corresponding version in `CHANGELOG.md`
+3. Commit both `version.rb` and `CHANGELOG.md`
+4. Run `bundle exec rake release` which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org)
 
 ## Contributing
 

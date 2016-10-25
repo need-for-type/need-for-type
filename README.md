@@ -1,6 +1,6 @@
 # need-for-type 
 
-need-for-type is a terminal type racer inpired by [Nitro Type](https://www.nitrotype.com/).
+need-for-type is a terminal type racer inpired by [Nitro Type](https://www.nitrotype.com/) and [TypeRacer](http://play.typeracer.com/).
 
 ![screenshot](https://raw.githubusercontent.com/need-for-type/need-for-type/master/assets/screenshot.png)
 
@@ -12,7 +12,7 @@ Run the following command:
 $ gem install 'need_for_type'
 ```
 
-## Usage
+## How to play 
 
 On a new terminal window run the following command:
 
@@ -39,12 +39,12 @@ To release a new version follow these steps:
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/jbernardo95/need-for-type. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/need-for-type/need-for-type. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## Credits 
 
-Texts used in need-for-type were all kindly provided to us by [TypeRacer](http://play.typeracer.com/)
+Texts used in need-for-type were all kindly provided to us by [TypeRacer](http://play.typeracer.com/).
 
 ## License
 

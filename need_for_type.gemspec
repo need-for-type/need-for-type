@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['tiagonbotelho@gmail.com', 'jbamaro95@gmail.com']
 
   spec.summary       = %q{A terminal typeracer}
-  spec.description   = %q{need-for-type is a terminal type racer inpired by Nitro Type}
+  spec.description   = %q{need-for-type is a terminal type racer inpired by Nitro Type and TypeRacer}
   spec.homepage      = 'https://github.com/need-for-type/need-for-type'
   spec.license       = 'MIT'
 
@@ -18,6 +18,8 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'bin'
   spec.executables   = ['need_for_type']
   spec.require_paths = ['lib']
+
+  spec.required_ruby_version = '>= 2.3'
 
   spec.add_development_dependency 'bundler', '~> 1.10'
   spec.add_development_dependency 'rake', '~> 10.0'

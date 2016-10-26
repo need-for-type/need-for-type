@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## Improved
+- Asynchronous score fetching 
+
 ## 0.3.1 - 2016/10/22
 
 ### Fixed

@@ -6,8 +6,13 @@ module NeedForType::API
 
   def get_scores(text_id)
     url = "https://#{@@api_url}/v1/scores?text_id=#{text_id}"
-    response = HTTParty.get(url)
-    JSON.parse(response.body)
+
+    begin
+      response = HTTParty.get(url)
+      JSON.parse(response.body)
+    rescue HTTParty::Error, StandardError
+      { error: "Ups! Something went wrong." }
+    end
   end
 
   def post_score(username, text_id, stats)
@@ -18,6 +23,9 @@ module NeedForType::API
                       wpm: stats[:wpm],
                       time: stats[:total_time], 
                       accuracy: stats[:accuracy] } }
-    HTTParty.post(url, headers: headers, body: body.to_json)
+    begin
+      HTTParty.post(url, headers: headers, body: body.to_json)
+    rescue HTTParty::Error, StandardError
+    end
   end
 end

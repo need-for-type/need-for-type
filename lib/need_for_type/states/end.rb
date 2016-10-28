@@ -14,11 +14,14 @@ module NeedForType::States
       @text_id = text_id
 
       @option = 0
-      @scores = get_scores(@text_id)
+      @scores = nil
+      fetch_and_render_scores_async 
     end
 
     def update
       @display_window.render_end(@stats, @scores, @option)
+
+      @fetch_and_render_scores_thread.join
 
       input_worker(4) do
         case @option
@@ -32,6 +35,13 @@ module NeedForType::States
       end
 
       return self
+    end
+
+    def fetch_and_render_scores_async
+      @fetch_and_render_scores_thread = Thread.new do
+        @scores = get_scores(@text_id)
+        @display_window.render_end(@stats, @scores, @option)
+      end
     end
   end
 end

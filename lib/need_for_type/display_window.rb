@@ -132,8 +132,11 @@ module NeedForType
     end
 
     def render_scores(scores, y, x)
-      if scores.empty?
-        self.set_render_pos(y + 1, x)
+      if scores.nil?
+        self.set_render_pos(y, x)
+        self.addstr("Fetching scores...")
+      elsif scores.empty?
+        self.set_render_pos(y, x)
         self.addstr("There are no score yet for this text.")
       else
         scores.each do |s|

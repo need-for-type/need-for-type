@@ -9,7 +9,7 @@ module NeedForType::API
 
     begin
       response = HTTParty.get(url)
-      JSON.parse(response.body)
+      { scores: JSON.parse(response.body) }
     rescue HTTParty::Error, StandardError
       { error: "Ups! Something went wrong." }
     end
@@ -26,6 +26,7 @@ module NeedForType::API
     begin
       HTTParty.post(url, headers: headers, body: body.to_json)
     rescue HTTParty::Error, StandardError
+      # Nothing is done
     end
   end
 end

@@ -5,8 +5,6 @@ module NeedForType::States
   class End < Menu
     include NeedForType::API
 
-    attr_accessor :scores
-
     def initialize(display_window, stats, difficulty, text_id)
       super(display_window)
       @stats = stats
@@ -14,12 +12,12 @@ module NeedForType::States
       @text_id = text_id
 
       @option = 0
-      @scores = nil
+      @scores_request = nil
       fetch_and_render_scores_async 
     end
 
     def update
-      @display_window.render_end(@stats, @scores, @option)
+      @display_window.render_end(@stats, @scores_request, @option)
 
       @fetch_and_render_scores_thread.join
 
@@ -39,8 +37,8 @@ module NeedForType::States
 
     def fetch_and_render_scores_async
       @fetch_and_render_scores_thread = Thread.new do
-        @scores = get_scores(@text_id)
-        @display_window.render_end(@stats, @scores, @option)
+        @scores_request = get_scores(@text_id)
+        @display_window.render_end(@stats, @scores_request, @option)
       end
     end
   end

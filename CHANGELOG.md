@@ -3,10 +3,17 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## 0.3.3 - 2016/10/29
+
+## Fixed
+- Score submission bug
+
 ## 0.3.2 - 2016/10/29
 
 ## Improved
 - Asynchronous score fetching 
+
+## Fixed
 - Connection failure handling
 
 ## 0.3.1 - 2016/10/22

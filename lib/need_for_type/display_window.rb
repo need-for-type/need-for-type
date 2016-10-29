@@ -51,7 +51,7 @@ module NeedForType
       end
     end
 
-    def render_end(stats, scores, selected_option)
+    def render_end(stats, scores_request, selected_option)
       self.render_box do
         self.render_with_color(GREEN) do
           self.set_render_pos(3, 4)
@@ -64,7 +64,7 @@ module NeedForType
 
         self.set_render_pos(10, 4)
         self.render_text("Top scores:", GREEN, NORMAL)
-        render_scores(scores, 11, 4)
+        render_scores(scores_request, 11, 4)
 
         self.set_render_pos(17, 4)
         mode = standout_mode(0, selected_option)
@@ -131,18 +131,18 @@ module NeedForType
       end
     end
 
-    def render_scores(scores, y, x)
-      if scores.nil?
+    def render_scores(scores_request, y, x)
+      if scores_request.nil?
         self.set_render_pos(y, x)
         self.addstr("Fetching scores...")
-      elsif scores.empty?
+      elsif scores_request[:scores]&.empty?
         self.set_render_pos(y, x)
-        self.addstr("There are no score yet for this text.")
-      elsif scores[:error]
+        self.addstr("There are no scores yet for this text.")
+      elsif scores_request[:error]
         self.set_render_pos(y + 1, x)
         self.addstr(scores[:error])
       else
-        scores.each do |s|
+        scores_request[:scores].each do |s|
           self.set_render_pos(y, x)
           self.addstr("#{s['wpm']} wpm #{s['username']}")
           y += 1

@@ -138,6 +138,9 @@ module NeedForType
       elsif scores.empty?
         self.set_render_pos(y, x)
         self.addstr("There are no score yet for this text.")
+      elsif scores[:error]
+        self.set_render_pos(y + 1, x)
+        self.addstr(scores[:error])
       else
         scores.each do |s|
           self.set_render_pos(y, x)

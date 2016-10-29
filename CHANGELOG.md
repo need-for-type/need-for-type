@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ## Improved
 - Asynchronous score fetching 
+- Connection failure handling
 
 ## 0.3.1 - 2016/10/22
 

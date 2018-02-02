@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## 0.3.4 - 2018/02/02
+
+## Fixed
+- Words per minute calculation during the game
+
 ## 0.3.3 - 2016/10/29
 
 ## Fixed

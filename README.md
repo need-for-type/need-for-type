@@ -2,7 +2,7 @@
 
 need-for-type is a terminal type racer inpired by [Nitro Type](https://www.nitrotype.com/) and [TypeRacer](http://play.typeracer.com/).
 
-![screenshot](https://raw.githubusercontent.com/need-for-type/need-for-type/master/assets/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/need-for-type/need-for-type/master/assets/screenshot.gif)
 
 ## Installation
 

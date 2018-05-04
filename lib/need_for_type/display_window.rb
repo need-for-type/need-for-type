@@ -83,7 +83,7 @@ module NeedForType
         self.render_text("4. Exit", WHITE, mode)
       end
     end
-    
+
     def render_submit_score(username)
       self.render_box do
         self.set_render_pos(3, 4)
@@ -140,7 +140,7 @@ module NeedForType
         self.addstr("There are no scores yet for this text.")
       elsif scores_request[:error]
         self.set_render_pos(y + 1, x)
-        self.addstr(scores[:error])
+        self.addstr(scores_request[:error])
       else
         scores_request[:scores].each do |s|
           self.set_render_pos(y, x)
